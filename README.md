@@ -20,7 +20,11 @@ Create a streaming application which gets tweets for a given twitter id and coun
 Output for the wordcount will be displayed on `wordcount.py` file's console
 
 ---
-
 ## Application flowchart
-
 [Block Diagram](streaming_flow_chart.png)
+
+---
+## Next steps:
+1. Push the results into a database, such that more applications based on this data can be realized
+2. Configure apache nifi to work with twitter api v2, such that data can be loaded in a solid way.
+3. Stream data from multiple users on multiple kafka topics
