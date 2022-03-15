@@ -1,10 +1,8 @@
 import time
 import requests
 import os
-import json
 from dotenv import load_dotenv
-from produce import my_producer
-from datetime import datetime, timedelta
+from produce import tweets_producer
 
 load_dotenv()
 bearer_token = os.environ.get("BEARER_TOKEN")
@@ -19,7 +17,7 @@ def get_user_id(usernames :str):
     id = json_resonse['data'][0]['id']
     return id
 
-def get_timeline(id, pagination_token=None):
+def get_timeline(id):
     query_params = {'tweet.fields':'created_at', 'max_results':100}
     timeline_url = f"https://api.twitter.com/2/users/{id}/tweets"
     json_response = connect_to_endpoint(timeline_url, query_params)
@@ -53,7 +51,7 @@ def main(id=None):
     print(id)
     json_response = get_timeline(id)
     for item in json_response['data']:
-        my_producer.send('tweets', value = item) 
+        tweets_producer.send('tweets', value = item) 
         time.sleep(2)
     
 
