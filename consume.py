@@ -4,7 +4,7 @@ from kafka import KafkaConsumer
 
 
 # generating the Kafka Consumer
-my_consumer = KafkaConsumer(
+tweets_consumer = KafkaConsumer(
     'tweets',
     bootstrap_servers=['localhost:29092'],
     auto_offset_reset='earliest',
@@ -13,6 +13,6 @@ my_consumer = KafkaConsumer(
     value_deserializer=lambda x: loads(x.decode('utf-8'))
 )
 
-for message in my_consumer:  
+for message in tweets_consumer:  
     message = message.value  
     print(f'new message {message}')
